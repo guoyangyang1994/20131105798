@@ -64,6 +64,33 @@ class ViewController: UIViewController {
         求值()
     }
   
+    @IBAction func 平方(sender: AnyObject) {
+        计算器.设置当前算法(.平方)
+        求值()
+        
+
+    }
+    @IBAction func 指数幂(sender: AnyObject) {
+        计算器.设置当前算法(.指数幂)
+        求值()
+        
+
+    }
+    @IBAction func 重置当前(sender: AnyObject) {
+        显示缓存 = ""
+        self.屏幕.text = "当前输入已撤销👉 0.0"
+
+    
+    }
+    @IBAction func 重置所有(sender: AnyObject) {
+        显示缓存 = ""
+        缓存 = 0.0
+        缓存2 = nil
+        计算器.设置当前算法(.未选择)
+        self.屏幕.text = ""
+
+        
+    }
         @IBAction func 结果(sender: AnyObject) {
         求值()
     }
