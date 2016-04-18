@@ -1,117 +1,141 @@
 //
 //  ViewController.swift
+/*
+计算器:Calculator
+显示缓存:Displaycache
+缓存:cache
+求值:evaluation
+点计数:Pointcount
+点按:click
+数字:number
+前一个数字:Lastnumber
+临时:temporary
+结果:result
+屏幕：screen
+小数点：point
+算法加：algorithmjia
+算法减：algorithmjian
+算法乘：algorithmcheng
+算法除：algorithmchu
+算法平方：algorithmpingfang
+算法指数幂：algorithmzhishumi
+重置所有：Resetall
+重置当前：Resetnow
+等号：equalsign
+运算结果：yunsuanresult
+*/
 
 
 import UIKit
 
 class ViewController: UIViewController {
+                           
     
+    var Calculator:calculation = calculation()
+    var Displaycache:String = ""
+    var cache = 0.0
+    var cache2:Double?
     
-    var 计算器:计算 = 计算()
-    var 显示缓存:String = ""
-    var 缓存 = 0.0
-    var 缓存2:Double?
+     @IBOutlet weak var screen:UITextField!
     
-     @IBOutlet weak var 屏幕:UITextField!
-    
-    @IBAction func 数字0(sender: AnyObject) {
-        点按("0")
+    @IBAction func number0(sender: AnyObject) {
+        click("0")
     }
-    @IBAction func 数字1(sender: AnyObject) {
-        点按("1")
+    @IBAction func number1(sender: AnyObject) {
+        click("1")
     }
-    @IBAction func 数字2(sender: AnyObject) {
-        点按("2")
+    @IBAction func number2(sender: AnyObject) {
+        click("2")
     }
-    @IBAction func 数字3(sender: AnyObject) {
-        点按("3")
+    @IBAction func number3(sender: AnyObject) {
+       click("3")
     }
-    @IBAction func 数字4(sender: AnyObject) {
-        点按("4")
+    @IBAction func number4(sender: AnyObject) {
+        click("4")
     }
-    @IBAction func 数字5(sender: AnyObject) {
-        点按("5")
+    @IBAction func number5(sender: AnyObject) {
+        click("5")
     }
-    @IBAction func 数字6(sender: AnyObject) {
-        点按("6")
+    @IBAction func number6(sender: AnyObject) {
+        click("6")
     }
-    @IBAction func 数字7(sender: AnyObject) {
-        点按("7")
+    @IBAction func number7(sender: AnyObject) {
+        click("7")
     }
-    @IBAction func 数字8(sender: AnyObject) {
-        点按("8")
+    @IBAction func number8(sender: AnyObject) {
+        click("8")
     }
-    @IBAction func 数字9(sender: AnyObject) {
-        点按("9")
+    @IBAction func number9(sender: AnyObject) {
+        click("9")
     }
-    @IBAction func 数字点(sender: AnyObject) {
-        点按(".")
+    @IBAction func npoint(sender: AnyObject) {
+        click(".")
     }
-    @IBAction func 算法加(sender: AnyObject) {
-        计算器.设置当前算法(.加法)
-        求值()
+    @IBAction func algorithmjia(sender: AnyObject) {
+        Calculator.Setcurrentalgorithm(.addition)
+        evaluation()
     }
-    @IBAction func 算法减(sender: AnyObject) {
-        计算器.设置当前算法(.减法)
-        求值()
+    @IBAction func algorithmjian(sender: AnyObject) {
+        Calculator.Setcurrentalgorithm(.subtraction)
+        evaluation()
     }
-    @IBAction func 算法乘(sender: AnyObject) {
-        计算器.设置当前算法(.乘法)
-        求值()
+    @IBAction func algorithmcheng(sender: AnyObject) {
+        Calculator.Setcurrentalgorithm(.multiplication)
+        evaluation()
     }
-    @IBAction func 算法除(sender: AnyObject) {
-        计算器.设置当前算法(.除法)
-        求值()
+    @IBAction func algorithmchu(sender: AnyObject) {
+        Calculator.Setcurrentalgorithm(.division)
+        evaluation()
     }
   
-    @IBAction func 平方(sender: AnyObject) {
-        计算器.设置当前算法(.平方)
-        求值()
+    @IBAction func pingfang(sender: AnyObject) {
+        Calculator.Setcurrentalgorithm(.pingfang)
+        evaluation()
     }
-    @IBAction func 指数幂(sender: AnyObject) {
-        计算器.设置当前算法(.指数幂)
-        求值()
+    @IBAction func zhishumi(sender: AnyObject) {
+       Calculator.Setcurrentalgorithm(.zhishumi)
+        evaluation()
 
     }
-    @IBAction func 重置当前(sender: AnyObject) {
-        显示缓存 = ""
-        self.屏幕.text = "当前输入已撤销👉 0.0"
+    @IBAction func Resetnow(sender: AnyObject) {
+        Displaycache = ""
+        self.screen.text = "当前输入已撤销👉 0.0"
     }
-    @IBAction func 重置所有(sender: AnyObject) {
-        显示缓存 = ""
-        缓存 = 0.0
-        缓存2 = nil
-        计算器.设置当前算法(.未选择)
-        self.屏幕.text = ""
+    @IBAction func Resetall(sender: AnyObject) {
+        Displaycache = ""
+       cache = 0.0
+        cache2 = nil
+        Calculator.Setcurrentalgorithm(.Nochoice)
+        self.screen.text = ""
 
         
     }
-        @IBAction func 结果(sender: AnyObject) {
-        求值()
+        @IBAction func result(sender: AnyObject) {
+        evaluation()
     }
-    func 点按(数字:String) {
-        显示缓存 += 数字
-        self.屏幕.text = 显示缓存
+    func click(number:String) {
+        Displaycache += number
+        self.screen.text = Displaycache
     }
-    func 求值() {
+    func evaluation() {
         
-        if !显示缓存.isEmpty {
-            let 临时 = 显示缓存 as NSString
-            缓存 = 临时.doubleValue
-            显示缓存 = ""
+        if !Displaycache.isEmpty {
+            let temporary = Displaycache as NSString
+            cache = temporary.doubleValue
+            Displaycache = ""
         }
-        let 临时 = 缓存
-        var 结果 = ""
+        let temporary = cache
+        var result = ""
         
-        if let 前一个数字 = 缓存2 {
-            结果 = 计算器.求结果(前一个数字, 被操作数: 临时)
+        if let Lastnumber = cache2 {
+            result = Calculator.Resultseeking(Lastnumber,Operandoperand:temporary)
             
-            self.屏幕.text = 结果
-            let 临 = 结果 as NSString
-            缓存2 = 临.doubleValue
+            self.screen.text = result
+            let temporary = result as NSString
+            cache2 = temporary.doubleValue
         } else {
-            缓存2 = 缓存
-            缓存 = 0.0
+            cache2 = cache
+            cache = 0.0
         }
         
     }
@@ -121,7 +145,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        屏幕.editing
+        screen.editing
         // Do any additional setup after loading the view, typically from a nib.
     }
 
